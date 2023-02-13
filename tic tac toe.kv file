@@ -1,0 +1,104 @@
+MainInterface:
+<MainInterface>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "MainInterface.png"
+
+    Image:
+        source: "background.png"
+        pos: root.width-460, root.height-500
+        size: 400, 440
+    Image:
+        id: player
+        source: "Player_1.png"
+        pos: root.width-305, root.height-120
+        size: 100, 25
+    GridLayout:
+        pos: root.width-410, root.height-460
+        size: 300, 340
+        cols: 3
+        padding: 50
+        spacing: 5
+        Button:
+            background_color: 0,0,0,0
+            name: '1'
+            on_press: root.tracking(self, img1)
+            Image:
+                id: img1
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '2'
+            on_press: root.tracking(self, img2)
+            Image:
+                id: img2
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '3'
+            on_press: root.tracking(self, img3)
+            Image:
+                id: img3
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '4'
+            on_press: root.tracking(self, img4)
+            Image:
+                id: img4
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '5'
+            on_press: root.tracking(self, img5)
+            Image:
+                id: img5
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '6'
+            on_press: root.tracking(self, img6)
+            Image:
+                id: img6
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '7'
+            on_press: root.tracking(self, img7)
+            Image:
+                id: img7
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '8'
+            on_press: root.tracking(self, img8)
+            Image:
+                id: img8
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
+        Button:
+            background_color: 0,0,0,0
+            name: '9'
+            on_press: root.tracking(self, img9)
+            Image:
+                id: img9
+                source: "Button.png"
+                size: 61.66, 75
+                center: self.parent.center
