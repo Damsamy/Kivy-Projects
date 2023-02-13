@@ -1,0 +1,128 @@
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.core.window import Window
+from kivy.uix.button import Button
+
+# size of app window
+Window.size = (960, 540)
+
+# main class, which is a widget in which all other layouts are ordered
+class MainInterface(Widget):
+
+    # When buttons are pressed they are recorded in this variable, which can then be read to see if a winning combination was made by either player
+    btn_lst = [None] * 10
+    
+    # Variable to switch players after a botton has been pressed
+    Player_switch = False
+    
+    # Variable that changes to True if a win condition is met
+    WON = False
+    Cats_game = 0
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.BTN = Button(text='', size=(500, 200), pos=(480 - 250, 270 - 100), background_normal="Winner.png",
+                          background_down="Winner.png")
+        self.BTN.bind(on_press= self.restart)
+    # function that will reset the board if cats game or if game is won.
+    def restart(self, event):
+        print("you have reset")
+        self.remove_widget(self.BTN)
+        self.btn_lst = [None] * 10
+        self.WON = False
+        self.Player_switch = False
+        self.Cats_game = 0
+        for i,j in self.ids.items():
+            if (i == "player"):
+                pass
+            else:
+                j.source = "Button.png"
+            print(i)
+
+    # 1 will represent our player 1 and 0 will be player 2
+    # function that tracks the buttons being pressed and if a win condition is met
+    def tracking(self, BTN_Info, IMG):
+        
+        if not self.WON:
+            # This block of code detects whos turn it is, displays it, and then detects and shows when a move is made
+            if self.btn_lst[int(BTN_Info.name)] == None:
+                if not self.Player_switch:
+                    self.btn_lst[int(BTN_Info.name)] = 1
+                    IMG.source = "Pressed_O.png"
+                    self.ids.player.source = "Player_2.png"
+                    self.Cats_game += 1
+                    print(self.Cats_game)
+                else:
+                    self.btn_lst[int(BTN_Info.name)] = 0
+                    IMG.source = "Pressed_T.png"
+                    self.ids.player.source = "Player_1.png"
+                    self.Cats_game += 1
+                    print(self.Cats_game)
+                    
+                # this code changes the turn from one player to the other
+                self.Player_switch = not self.Player_switch
+                print(*self.btn_lst)
+                
+            # winning conditions
+            # Block of code specifically for detecting if a win condition is, which can be changed easily
+            if self.btn_lst[1] == self.btn_lst[2] == self.btn_lst[3] == 1 or self.btn_lst[1] == \
+                    self.btn_lst[2] == self.btn_lst[3] == 0:
+                self.WON = True
+                print('you win')
+                self.add_widget(self.BTN)
+            if self.btn_lst[1] == self.btn_lst[5] == self.btn_lst[9] == 1 or self.btn_lst[1] == \
+                    self.btn_lst[5] == self.btn_lst[9] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            if self.btn_lst[1] == self.btn_lst[4] == self.btn_lst[7] == 1 or self.btn_lst[1] == \
+                    self.btn_lst[4] == self.btn_lst[7] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            if self.btn_lst[2] == self.btn_lst[5] == self.btn_lst[8] == 1 or self.btn_lst[2] == \
+                    self.btn_lst[5] == self.btn_lst[8] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            if self.btn_lst[3] == self.btn_lst[5] == self.btn_lst[7] == 1 or self.btn_lst[3] == \
+                    self.btn_lst[5] == self.btn_lst[7] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            if self.btn_lst[3] == self.btn_lst[6] == self.btn_lst[9] == 1 or self.btn_lst[3] == \
+                    self.btn_lst[6] == self.btn_lst[9] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            if self.btn_lst[4] == self.btn_lst[5] == self.btn_lst[6] == 1 or self.btn_lst[4] == \
+                    self.btn_lst[5] == self.btn_lst[6] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            if self.btn_lst[7] == self.btn_lst[8] == self.btn_lst[9] == 1 or self.btn_lst[7] == \
+                    self.btn_lst[8] == self.btn_lst[9] == 0:
+                self.WON = True
+                self.add_widget(self.BTN)
+                print('you win')
+            # Last block of code that detects if all moves have been played but there is no winner, at which point it resets
+            elif self.Cats_game > 8 and not self.WON:
+                print("you have reset")
+                self.remove_widget(self.BTN)
+                self.btn_lst = [None] * 10
+                self.WON = False
+                self.Player_switch = False
+                self.Cats_game = 0
+                for i, j in self.ids.items():
+                    if (i == "player"):
+                        pass
+                    else:
+                        j.source = "Button.png"
+                    print(i)
+
+
+class TicTacTeoApp(App):
+    pass
+
+
+if __name__ == '__main__':
+    TicTacTeoApp().run()
